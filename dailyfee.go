@@ -9,7 +9,6 @@ import (
 
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/lotus/api"
-	"github.com/filecoin-project/lotus/build/buildconstants"
 	"github.com/filecoin-project/lotus/chain/actors/builtin/miner"
 	"github.com/filecoin-project/lotus/chain/types"
 	"github.com/gin-gonic/gin"
@@ -26,7 +25,7 @@ type dailyFee struct {
 type spFee struct {
 	DailyFee       float64 `json:"daily_fee"`
 	TotalUnpaidFee float64 `json:"total_unpaid_fee"`
-	TotalFee       float64 `json:"total_fee"`
+	TotalFee       float64 `json:"total_fee,omitempty"`
 }
 
 var (
@@ -227,9 +226,10 @@ func computeSpDailyFee(mid address.Address, jsonOut bool) (interface{}, error) {
 		d.TotalUnpaidFee += unpaidDays * fee
 
 		// 因为无法判断什么时候开始产生dailyfee，所以这里旧的扇区不准确
-		if info.Activation > buildconstants.UpgradeTockHeight {
-			d.TotalFee += (float64(info.Expiration) - float64(info.Activation)) / 2880 * fee
-		}
+		// 过一段时间后再打开
+		// if info.Activation > buildconstants.UpgradeTockHeight {
+		// 	d.TotalFee += (float64(info.Expiration) - float64(info.Activation)) / 2880 * fee
+		// }
 	}
 
 	if jsonOut {
@@ -242,7 +242,7 @@ func computeSpDailyFee(mid address.Address, jsonOut bool) (interface{}, error) {
 	buf.WriteString(fmt.Sprintf("Sectors: %d\n", len(onChainInfo)))
 	buf.WriteString(fmt.Sprintf("Daily Fee: %.12f FIL\n", d.DailyFee))
 	buf.WriteString(fmt.Sprintf("Total Unpaid Fee: %.12f FIL\n", d.TotalUnpaidFee))
-	buf.WriteString(fmt.Sprintf("Total Fee: %.12f FIL\n", d.TotalFee))
+	// buf.WriteString(fmt.Sprintf("Total Fee: %.12f FIL\n", d.TotalFee))
 	// buf.WriteString("Ps: Daily Fee * day != Total Fee, because the expiration time of the sector is different")
 
 	return buf.String(), nil
