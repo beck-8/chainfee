@@ -250,7 +250,7 @@ func Compute(mid address.Address, allSectors bool, offset abi.ChainEpoch, jsonOu
 	dayDatas := make([]*dayData, 0)
 	outData := ""
 	// 表头
-	outData += fmt.Sprintln("date,mid,sectors_sum,power(TiB),pledge,penalty")
+	outData += fmt.Sprintln("date,sectors_sum,power(TiB),pledge,penalty")
 
 	sectors_sum := 0
 	power := abi.SectorSize(0)
@@ -273,7 +273,7 @@ func Compute(mid address.Address, allSectors bool, offset abi.ChainEpoch, jsonOu
 			Penalty:     new(b.Rat).SetFrac(data.penalty.Int, b.NewInt(1e18)).FloatString(10),
 		}
 		dayDatas = append(dayDatas, structData)
-		outData += fmt.Sprintf("%v,%v,%v,%v,%v,%v\n", date, mid, seLen, structData.Power, structData.Pledge, structData.Penalty)
+		outData += fmt.Sprintf("%v,%v,%v,%v,%v\n", date, seLen, structData.Power, structData.Pledge, structData.Penalty)
 
 		sectors_sum += seLen
 		power += minerInfo.SectorSize * abi.SectorSize(seLen)
@@ -281,7 +281,7 @@ func Compute(mid address.Address, allSectors bool, offset abi.ChainEpoch, jsonOu
 		penalty = big.Add(penalty, data.penalty)
 	}
 	// 汇总数据
-	outData += fmt.Sprintf(",,%v,%v,%v,%v\n", sectors_sum, float64(power)/(1<<40), new(b.Rat).SetFrac(pledge.Int, b.NewInt(1e18)).FloatString(10), new(b.Rat).SetFrac(penalty.Int, b.NewInt(1e18)).FloatString(10))
+	outData += fmt.Sprintf("ALL,%v,%v,%v,%v\n", sectors_sum, float64(power)/(1<<40), new(b.Rat).SetFrac(pledge.Int, b.NewInt(1e18)).FloatString(10), new(b.Rat).SetFrac(penalty.Int, b.NewInt(1e18)).FloatString(10))
 
 	if jsonOut {
 		return dayDatas, nil
