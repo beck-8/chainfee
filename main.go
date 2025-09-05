@@ -28,5 +28,6 @@ func main() {
 	r.GET("/dailyfee", getDailyFee)
 	r.GET("/spdailyfee", getSpDailyFee)
 	r.GET("/faultfee", faultFee)
+	r.GET("/height", stateHeight)
 	r.Run(port)
 }
