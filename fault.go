@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/filecoin-project/go-state-types/big"
-	m "github.com/filecoin-project/go-state-types/builtin/v16/miner"
+	m "github.com/filecoin-project/go-state-types/builtin/v17/miner"
 	"github.com/gin-gonic/gin"
 )
 
