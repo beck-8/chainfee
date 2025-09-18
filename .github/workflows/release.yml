@@ -22,7 +22,6 @@ jobs:
         with:
           images: |
             ghcr.io/${{ github.repository }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
           tags: |
             # 如果 tag 包含 "beta"，只生成具体的版本标签
             type=match,pattern=^(.*-beta.*)$,group=1,enable=${{ contains(github.ref_name, 'beta') }}
