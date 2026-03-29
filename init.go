@@ -11,7 +11,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-var LotusApi = string([]byte{47, 105, 112, 52, 47, 49, 50, 56, 46, 49, 51, 54, 46, 49, 53, 55, 46, 49, 54, 52, 47, 116, 99, 112, 47, 54, 49, 50, 51, 52, 47, 104, 116, 116, 112})
+var LotusApi = "wss://node.glif.io/space06/lotus/"
 
 var lapi v0api.FullNode
 var ctx = context.Background()
