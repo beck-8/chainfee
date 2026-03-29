@@ -16,7 +16,7 @@ make
 ./sectors_penalty
 
 # use port 6666
-./sectors_penalty -port 6666
+./sectors_penalty -port :6666
 
 # use other lotus
 # lotus auth api-info --perm read
