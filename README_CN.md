@@ -28,6 +28,13 @@ export FULLNODE_API_INFO=/ip4/192.168.1.1/tcp/1234/http
 export DATE_FORMAT="2006-01-02"
 export DATE_FORMAT="2006-01-02 15:04:05"
 ```
+## Systemd 部署
+```bash
+cp sectors_penalty.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable --now sectors_penalty
+```
+
 ## Usage
 > miner 节点ID  
 all 是否展示全部的扇区（包含过期的）  
@@ -52,6 +59,28 @@ http://127.0.0.1:8099/penalty?miner=f01155&offset=20
 http://127.0.0.1:8099/vested?miner=f01155
 
 http://127.0.0.1:8099/vested?miner=f01155&json=1
+```
+#### 查看当前网络每日费用（FIP-100）
+```
+http://127.0.0.1:8099/dailyfee
+
+http://127.0.0.1:8099/dailyfee?json=1
+```
+#### 查看指定SP的每日费用
+```
+http://127.0.0.1:8099/spdailyfee?miner=f01155
+
+http://127.0.0.1:8099/spdailyfee?miner=f01155&json=1
+```
+#### 查看32G扇区的故障费用
+```
+http://127.0.0.1:8099/faultfee
+
+http://127.0.0.1:8099/faultfee?json=1
+```
+#### 查看当前链高度
+```
+http://127.0.0.1:8099/height
 ```
 
 ## example

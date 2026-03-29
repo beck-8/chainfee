@@ -1,0 +1,16 @@
+[Unit]
+Description=Sectors Penalty API Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/sectors_penalty
+ExecStart=/opt/sectors_penalty/sectors_penalty -port :8099
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+Environment=FULLNODE_API_INFO=wss://node.glif.io/space06/lotus/
+
+[Install]
+WantedBy=multi-user.target
