@@ -7,6 +7,9 @@
 - Get daily fee information for specific SPs
 - Get fault fee for 32G sectors
 ## install && run
+Requires Go 1.25.14 or newer. Uses Lotus v1.37.0, go-state-types v0.19.0, and filecoin-ffi v1.37.0 for nv29 / Actors v19 support.
+After updating an existing installation, run `rm -f deps && make` to sync and rebuild the FFI submodule.
+
 > When response is slow, optimize the connection between this program and lotus RPC
 ```bash
 git clone https://github.com/beck-8/sectors_penalty.git

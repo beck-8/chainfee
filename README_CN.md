@@ -7,6 +7,9 @@
 - 获取指定SP的dayfee情况
 - 获取32G扇区的faultfee
 ## install && run
+需要 Go 1.25.14 或更高版本；依赖 Lotus v1.37.0、go-state-types v0.19.0 和 filecoin-ffi v1.37.0，支持 nv29 / Actors v19。
+已有安装升级后请执行 `rm -f deps && make`，以同步并重新构建 FFI 子模块。
+
 > 返回慢时，优化此程序到lotus rpc之间的链接
 ```bash
 git clone https://github.com/beck-8/sectors_penalty.git
